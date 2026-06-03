@@ -4,27 +4,7 @@
 \alias{spillover_matrix}
 \title{Compute the spillover matrix based on single color transfection controls.}
 \usage{
-spillover_matrix(
-  data,
-  cont_ind,
-  comp_pattern,
-  threshold,
-  manual_comp,
-  interactive = TRUE
-)
-}
-\arguments{
-\item{data}{A cytoset containing compensation control samples.}
-
-\item{cont_ind}{Integer indices for the control samples.}
-
-\item{comp_pattern}{Channel suffix pattern used for compensation channels.}
-
-\item{threshold}{Density threshold used while filtering controls.}
-
-\item{manual_comp}{Whether to allow manual spillover adjustment.}
-
-\item{interactive}{Whether manual console input is allowed.}
+spillover_matrix(data, cont_ind, comp_pattern, threshold, manual_comp)
 }
 \description{
 Compute the spillover matrix based on single color transfection controls.

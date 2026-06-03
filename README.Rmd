@@ -1,19 +1,28 @@
+---
+output: github_document
+---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
 
 # expressalyzr
 
 <!-- badges: start -->
-
 <!-- badges: end -->
 
-The goal of expressalyzr is to automate the analysis of flow cytometry
-data.
+The goal of expressalyzr is to automate the analysis of flow cytometry data.
 
 ## Installation
 
-You can install the expressalyzr from
-[GitHub](https://github.com/freitim/expressalyzr) with:
+You can install the expressalyzr from [GitHub](https://github.com/freitim/expressalyzr) with:
 
 ``` r
 devtools::install_github("freitim/expressalyzr", ref = "main")
@@ -23,7 +32,7 @@ devtools::install_github("freitim/expressalyzr", ref = "main")
 
 This is a basic example which shows you how to solve a common problem:
 
-``` r
+```{r example, eval=FALSE}
 library(expressalyzr)
 library(ggcyto)
 

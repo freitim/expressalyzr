@@ -6,9 +6,6 @@
 \usage{
 sos(f)
 }
-\arguments{
-\item{f}{Numeric residual vector.}
-}
 \description{
 Sum of squares cost function.
 }

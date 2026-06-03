@@ -2,85 +2,14 @@
 % Please edit documentation in R/run_pipeline.R
 \name{run_pipeline}
 \alias{run_pipeline}
-\title{Run the data processing pipeline}
+\title{Run the data processing pipline}
 \usage{
-run_pipeline(
-  data_path,
-  view_config = TRUE,
-  gating_output = NULL,
-  interactive = TRUE,
-  gate_designer = TRUE,
-  gating_templates = NULL,
-  gated_populations = NULL,
-  report = TRUE,
-  include_gating_plots = TRUE,
-  summaries = FALSE,
-  save_gating_set = FALSE,
-  config_profile = c("default", "legacy", "advanced"),
-  ...
-)
-}
-\arguments{
-\item{data_path}{Path to the experiment data directory.}
-
-\item{view_config}{Whether to open the config file for viewing.}
-
-\item{gating_output}{Legacy compatibility option. Use \code{NULL} for the
-default run or \code{"report"} as an alias for \code{report = TRUE}.
-Legacy \code{"inspect"} and \code{"set"} values fail clearly.}
-
-\item{interactive}{Whether the pipeline may pause for user-facing setup or
-review steps. When \code{TRUE}, missing starter files can be created,
-\code{config.yml} can be opened for review, the gate designer can launch,
-and manual compensation/cutoff prompts may wait for input. When
-\code{FALSE}, no editors, browser apps, or console prompts are allowed;
-required setup files must already exist.}
-
-\item{gate_designer}{If \code{TRUE}, launch
-\code{\link{design_gating_template}} before applying gates. This is
-additive and requires \code{interactive = TRUE}.}
-
-\item{gating_templates}{Optional named character vector/list of OpenCyto
-template files to apply independently. Paths are resolved relative to
-\code{data_path}. In interactive runs, missing explicit template files are
-created from the starter \code{gt_samples.csv} template. When \code{NULL},
-the legacy \code{gt_samples.csv} workflow is used.}
-
-\item{gated_populations}{Optional character vector of biological population
-labels to pair with \code{gating_templates}. When omitted, names on
-\code{gating_templates} are used, falling back to template file names.}
-
-\item{report}{If \code{TRUE}, generate one comprehensive HTML report with QC,
-gating, channel, compensation, and summary sections.}
-
-\item{include_gating_plots}{If \code{TRUE}, include per-sample gate scatter
-grids in the unified HTML report. These plots are useful for gate review
-but can make reports large for plate-scale experiments.}
-
-\item{summaries}{If \code{TRUE}, write additive population-level and
-marker/channel-level summary CSVs. Legacy outputs and return values are
-unchanged.}
-
-\item{save_gating_set}{If \code{TRUE}, save the applied
-\code{flowWorkspace::GatingSet}. In multi-template mode, one GatingSet is
-saved per template.}
-
-\item{config_profile}{Starter config profile to copy when
-\code{config.yml} does not exist. Existing config files are loaded
-unchanged. One of \code{"default"}, \code{"legacy"}, or
-\code{"advanced"}.}
-
-\item{...}{Reserved. Deprecated options such as \code{qc},
-\code{qc_output}, \code{gating_report}, \code{channel_report},
-\code{provenance}, \code{plots}, and \code{use_gui} are no longer
-accepted.}
+run_pipeline(data_path, view_config = TRUE, inspect_gating = FALSE)
 }
 \value{
-The event-level \code{data.table}. The same table is always written
-  to \code{<experiment>.csv} in \code{data_path}. Report, summary, and
-  GatingSet options add files on disk without changing the return type.
+
 }
 \description{
-Run the data processing pipeline that links together other functions in the
-expressalyzr package.
+Run the data processing pipline that links together other functions in the
+ expressalyzr package.
 }

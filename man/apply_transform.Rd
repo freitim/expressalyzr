@@ -4,14 +4,7 @@
 \alias{apply_transform}
 \title{Transform arbitrary values.}
 \usage{
-apply_transform(data, t_fun, channel_pattern = "-A")
-}
-\arguments{
-\item{data}{A cytoset to transform.}
-
-\item{t_fun}{Transformation function accepting values and channel name.}
-
-\item{channel_pattern}{Regex pattern for fluorescence channels to transform.}
+apply_transform(data, t_fun)
 }
 \description{
 Transform arbitrary values.

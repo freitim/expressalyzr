@@ -6,13 +6,6 @@
 \usage{
 run_fit(x, y, f)
 }
-\arguments{
-\item{x}{Known MEFL values.}
-
-\item{y}{Observed channel intensities.}
-
-\item{f}{Objective function used for residuals.}
-}
 \description{
 Fit bead model to mean peak data.
 }

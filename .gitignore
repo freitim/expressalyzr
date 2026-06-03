@@ -1,11 +1,4 @@
-# R package / session
-.Rproj.user/
+.Rproj.user
 .Rhistory
 .RData
 .Ruserdata
-*.Rcheck/
-*.tar.gz
-Rplots.pdf
-
-# OS
-.DS_Store

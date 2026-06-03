@@ -10,9 +10,7 @@ create_data_subdir(data_path)
 \item{data_path}{The path to the original data directory.}
 }
 \value{
-\code{TRUE} if a data directory was created and files were moved,
-  \code{FALSE} if the move failed, or \code{NULL} if the data directory
-  already existed.
+
 }
 \description{
 This is a utility function for creating a subdirectory for the data in the

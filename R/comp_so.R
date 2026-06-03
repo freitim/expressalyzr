@@ -1,14 +1,6 @@
 #' Compute the spillover matrix based on single color transfection controls.
 #'
-#' @param data A cytoset containing compensation control samples.
-#' @param cont_ind Integer indices for the control samples.
-#' @param comp_pattern Channel suffix pattern used for compensation channels.
-#' @param threshold Density threshold used while filtering controls.
-#' @param manual_comp Whether to allow manual spillover adjustment.
-#' @param interactive Whether manual console input is allowed.
-#'
-spillover_matrix <- function(data, cont_ind, comp_pattern, threshold,
-                             manual_comp, interactive = TRUE) {
+spillover_matrix <- function(data, cont_ind, comp_pattern, threshold, manual_comp) {
 
   if (length(data) != length(cont_ind)) {
     stop("Number of control samples and index of control samples are of different length.")
@@ -26,11 +18,7 @@ spillover_matrix <- function(data, cont_ind, comp_pattern, threshold,
 
   data <- filter_density(data, chs, n_bins, threshold)
 
-  if (!requireNamespace("flowStats", quietly = TRUE)) {
-    stop("Compensation requires the flowStats package.", call. = FALSE)
-  }
-  data_flowset <- flowWorkspace::cytoset_to_flowSet(data)
-  so_mat <- flowCore::spillover(data_flowset,
+  so_mat <- flowCore::spillover(data,
                                 unstained = 1,
                                 patt = comp_pattern,
                                 fsc = "FSC-A",
@@ -39,12 +27,7 @@ spillover_matrix <- function(data, cont_ind, comp_pattern, threshold,
                                 stain_match = "ordered")
 
   if (manual_comp) {
-    if (!interactive) {
-      stop("manual compensation requires interactive = TRUE.",
-           call. = FALSE)
-    }
-
-    so_mat <- manual_compensation(data[-1, chs], so_mat, chs)
+    so_mat <- manual_compensation(data[-cont_ind[1], chs], so_mat, chs)
   }
 
   return(so_mat)
@@ -80,16 +63,12 @@ manual_compensation <- function(data, so_mat, chs) {
           ggplot2::scale_fill_viridis_c() +
           ggplot2::ggtitle(paste("Current value:", so_mat[i, j]))
 
-        show_manual_plot(pl, prefix = "expressalyzr_spillover")
+        print(pl)
 
-        new_v <- read_prompt_input(
-          "Adjust spillover (numeric + Enter redraws; blank Enter accepts): "
-        )
+        new_v <- readline(prompt = "Adjust spillover: ")
 
         if (suppressWarnings(!is.na(as.numeric(new_v)))) {
           so_mat[i, j] <- as.numeric(as.character(new_v))
-          message("Updated ", i, " vs ", j, " spillover to ", so_mat[i, j],
-                  "; redrawing.")
         }
       }
     }
@@ -98,11 +77,6 @@ manual_compensation <- function(data, so_mat, chs) {
 }
 
 #' Filter data according to a density threshold.
-#'
-#' @param data A cytoset to filter.
-#' @param channels Character vector of channels used for density filtering.
-#' @param bins Number of bins used to estimate local density.
-#' @param th Density threshold.
 #'
 filter_density <- function(data, channels, bins, th) {
 

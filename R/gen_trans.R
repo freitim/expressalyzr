@@ -1,5 +1,5 @@
 #'
-generate_transformation <- function(data, channel_pattern = "-A") {
+generate_transformation <- function(data) {
 
   gt_file <- system.file("tools", "gt_beads.csv", package = "expressalyzr",
                          mustWork = TRUE)
@@ -16,11 +16,8 @@ generate_transformation <- function(data, channel_pattern = "-A") {
   data_dt <- flowCore::exprs(data_dt[[1]])
   data_dt <- data.table::as.data.table(data_dt)
 
-  chs <- fluorescence_channel_names(colnames(data_dt), channel_pattern)
-  if (length(chs) == 0L) {
-    stop("No fluorescence channels matched channel_pattern for MEFL transformation.",
-         call. = FALSE)
-  }
+  chs <- colnames(data_dt)
+  chs <- chs[grepl("FL", chs)]
 
   data_dt <- data_dt[, chs, with = FALSE]
   data_dt <- data_dt[rowSums(data_dt <= 0) == 0]
@@ -41,6 +38,15 @@ generate_transformation <- function(data, channel_pattern = "-A") {
 
   select_i <- rowSums(met_dt[, !"Cluster"] > 1.275) == 0
   select_cl <- met_dt[select_i]$Cluster
+
+  # pl <- ggplot2::ggplot(data = data_dt, ggplot2::aes(x = `FL1-A`, y = `FL3-A`,
+  #                                                    color = Cluster %in% select_cl)) +
+  #   ggplot2::geom_point(alpha = 0.1) +
+  #   ggplot2::scale_x_continuous(trans = "log") +
+  #   ggplot2::scale_y_continuous(trans = "log") +
+  #   ggplot2::facet_wrap(Cluster~.)
+  #
+  # print(pl)
 
   data_dt <- data_dt[Cluster %in% select_cl]
 
@@ -91,15 +97,9 @@ generate_transformation <- function(data, channel_pattern = "-A") {
 
 #' Sum of squares cost function.
 #'
-#' @param f Numeric residual vector.
-#'
 sos <- function(f) sum(f ^ 2)
 
 #' Fit bead model to mean peak data.
-#'
-#' @param x Known MEFL values.
-#' @param y Observed channel intensities.
-#' @param f Objective function used for residuals.
 #'
 run_fit <- function(x, y, f) {
 
@@ -124,14 +124,10 @@ bead_model <- function(x, m, b, a) exp((log(x + a) - b) / m)
 
 #' Transform arbitrary values.
 #'
-#' @param data A cytoset to transform.
-#' @param t_fun Transformation function accepting values and channel name.
-#' @param channel_pattern Regex pattern for fluorescence channels to transform.
-#'
-apply_transform <- function(data, t_fun, channel_pattern = "-A") {
+apply_transform <- function(data, t_fun) {
 
   chs <- flowCore::colnames(data)
-  chs <- fluorescence_channel_names(chs, channel_pattern)
+  chs <- chs[grepl("FL", chs)]
 
   set_fun <- function(channel) {
     force(channel)
