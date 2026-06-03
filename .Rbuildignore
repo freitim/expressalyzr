@@ -1,6 +1,11 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^LICENSE\.md$
-^README\.Rmd$
 ^data-raw$
 ^expressalyzr\.Rproj$
+^\.DS_Store$
+^.*\.Rcheck$
+^scratch$
+^examples$
+^AGENTS\.md$
+^automated_flow_cytometry_prd\.md$
