@@ -6,6 +6,15 @@
 \usage{
 filter_density(data, channels, bins, th)
 }
+\arguments{
+\item{data}{A cytoset to filter.}
+
+\item{channels}{Character vector of channels used for density filtering.}
+
+\item{bins}{Number of bins used to estimate local density.}
+
+\item{th}{Density threshold.}
+}
 \description{
 Filter data according to a density threshold.
 }

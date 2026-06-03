@@ -1,0 +1,19 @@
+default:
+  mefl_transform: FALSE
+  beads_pattern: "Beads"
+  redo_comp: FALSE
+  controls_pattern: "Controls"
+  controls_index: !expr c(1, 2, 3, 4, 5) # (Unstained, FL1, FL3, FL6, FL11)
+  controls_design_column: "Channel"
+  controls_population_column: "gated_population"
+  controls_map: NULL
+  channel_map: "cytoflex"
+  channel_pattern: "-A"
+  manual_comp: TRUE
+  density_th: 0.0002
+  bg_cutoff: 0.99
+  manual_cutoff: TRUE
+  spec_file: "your_experimental_specs.csv"
+  merge_by: "ID"
+  adjust_gating: FALSE
+  bg_channels: !expr c("FL1-H", "FL3-H", "FL11-H")

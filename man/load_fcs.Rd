@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils.R
 \name{load_fcs}
 \alias{load_fcs}
-\title{Load .fcs files.}
+\title{Load .fcs files}
 \usage{
 load_fcs(file_path)
 }
@@ -13,7 +13,7 @@ load_fcs(file_path)
 A GatingSet object.
 }
 \description{
-Load .fcs files into GatingSet object using read.ncdfFlowSet function.
+Load .fcs files into a cytoset.
 }
 \examples{
 path <- system.file("extdata", "example_fcs_files", package = "expressalyzr", mustWork = TRUE)
