@@ -4,10 +4,26 @@
 \alias{load_config}
 \title{Create and/or load configuration file.}
 \usage{
-load_config(config_file_path, view_config)
+load_config(
+  config_file_path,
+  view_config,
+  interactive = TRUE,
+  config_profile = c("default", "legacy", "advanced")
+)
 }
 \arguments{
-\item{data_path}{The path to the original data directory.}
+\item{config_file_path}{Path to the experiment \code{config.yml}.}
+
+\item{view_config}{Whether to open the config file for review before
+loading it.}
+
+\item{interactive}{Whether opening editors and waiting for console input is
+allowed.}
+
+\item{config_profile}{Starter config profile to copy when
+\code{config.yml} does not exist. Existing config files are loaded
+unchanged. One of \code{"default"}, \code{"legacy"}, or
+\code{"advanced"}.}
 }
 \description{
 A configuration file is created from a template and opened for editing.

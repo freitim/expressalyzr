@@ -6,6 +6,20 @@
 \usage{
 bin(x, bins, lower = 0, upper = 1, s_fun = NULL, use_quantiles = FALSE)
 }
+\arguments{
+\item{x}{Numeric vector to bin.}
+
+\item{bins}{Number of bins.}
+
+\item{lower}{Lower quantile or range bound.}
+
+\item{upper}{Upper quantile or range bound.}
+
+\item{s_fun}{Optional summary function to apply within each bin.}
+
+\item{use_quantiles}{Whether to use quantile breaks instead of evenly spaced
+breaks.}
+}
 \description{
 Binning function.
 }

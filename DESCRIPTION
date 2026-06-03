@@ -1,35 +1,51 @@
-Package: expressalyzr
 Type: Package
+Package: expressalyzr
 Title: Gate and compensate flow cytometry data
-Version: 0.0.0.9000
-Authors@R: person("Timothy", "Frei", email = "frei.timothy@gmail.com", role = c("aut", "cre"))
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Version: 0.05
+Authors@R: c(
+    person("Timothy", "Frei", email = "frei.timothy@gmail.com", role = c("aut", "cre")),
+    person("Asterios", "Arampatzis", email = "aarampatzis@ethz.ch", role = "aut")
+    )
+Description: Automates reproducible flow cytometry analysis workflows from
+    experiment folders of FCS files through gating, compensation, quality
+    control, report generation, and event-level table export.
 License: MIT + file LICENSE
+URL: https://github.com/Ariwor/expressalyzr
+BugReports: https://github.com/Ariwor/expressalyzr/issues
 Encoding: UTF-8
 LazyData: true
-biocViews:
 Imports: 
+    Biobase,
     data.table,
-    ncdfFlow,
     flowWorkspace,
+    flowStats,
     config,
     flowCore,
     openCyto,
     Rmixmod,
-    ggcyto,
     ggplot2,
-    yaml,
-    gsl,
-    RcppGSL,
     Rfast,
+    gtools,
+    MASS,
+    pracma,
     rmarkdown,
     mixtools
 Suggests: 
+    DT,
+    ggcyto,
+    gsl,
+    hexbin,
+    knitr,
+    plotly,
+    RcppGSL,
+    scales,
+    shiny,
     testthat,
+    yaml,
     spelling
-RoxygenNote: 7.1.1.9000
+Enhances:
+    conicfit
+RoxygenNote: 7.3.3
 Config/testthat/edition: 3
 Language: en-US
 Depends: 

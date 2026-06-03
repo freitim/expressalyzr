@@ -3,16 +3,25 @@ default:
   beads_pattern: "Beads"
   redo_comp: FALSE
   controls_pattern: "Controls"
-  controls_index: !expr c(1, 2, 3, 4, 5)
+  controls_index: !expr c(1, 2, 3, 4, 5) # legacy fallback
   controls_design_column: "Channel"
   controls_population_column: "gated_population"
   controls_map: NULL
   channel_map: "cytoflex"
+  # Optional explicit fallback when the design CSV/FCS metadata cannot resolve
+  # controls unambiguously.
+  # controls_map:
+  #   unstained: 1
+  #   channels:
+  #     FL5-A: 2
+  #     FL11-A: 4
+  #     FL1-A: 5
+  #     FL8-A: 3
   channel_pattern: "-A"
-  manual_comp: FALSE
+  manual_comp: TRUE
   density_th: 0.0002
   bg_cutoff: 0.99
-  manual_cutoff: FALSE
+  manual_cutoff: TRUE
   spec_file: "design.csv"
   merge_by: "ID"
   adjust_gating: FALSE

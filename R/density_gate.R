@@ -13,19 +13,19 @@ density_gate <- function(fr, pp_res, channels = NA, filterId = "",
   gate <- cbind(cl[[max_area]]$x, cl[[max_area]]$y)
 
   if (conv) {
-    gate <- gate[chull(gate),]
+    gate <- gate[chull(gate), ]
   } else if (ellipse) {
-    og <- gate
+    if (!requireNamespace("conicfit", quietly = TRUE)) {
+      stop("ellipse = TRUE requires the optional 'conicfit' package.",
+           call. = FALSE)
+    }
 
-    fit <- conicfit::EllipseDirectFit(og / 1000)
-    fit_g <- conicfit::AtoG(fit)$ParG
-    gate <- conicfit::calculateEllipse(fit_g[1], fit_g[2], fit_g[3], fit_g[4], 180 / pi * fit_g[5])
+    conicfit <- asNamespace("conicfit")
+    fit <- conicfit$EllipseDirectFit(gate / 1000)
+    fit_g <- conicfit$AtoG(fit)$ParG
+    gate <- conicfit$calculateEllipse(fit_g[1], fit_g[2], fit_g[3],
+                                      fit_g[4], 180 / pi * fit_g[5])
     gate <- gate * 1000
-#
-#     plot(og)
-#     lines(gate, col = "red")
-#
-#     readline()
   }
 
   colnames(gate) <- channels

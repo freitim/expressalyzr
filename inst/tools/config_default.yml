@@ -9,10 +9,10 @@ default:
   controls_map: NULL
   channel_map: "cytoflex"
   channel_pattern: "-A"
-  manual_comp: FALSE
+  manual_comp: TRUE
   density_th: 0.0002
   bg_cutoff: 0.99
-  manual_cutoff: FALSE
+  manual_cutoff: TRUE
   spec_file: "design.csv"
   merge_by: "ID"
   adjust_gating: FALSE

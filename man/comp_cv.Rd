@@ -6,6 +6,12 @@
 \usage{
 comp_cv(x, log_t = FALSE)
 }
+\arguments{
+\item{x}{Numeric vector.}
+
+\item{log_t}{Whether to compute the coefficient of variation after log
+transformation of positive values.}
+}
 \description{
 Compute the coefficient of variation
 }
